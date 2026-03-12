@@ -42,7 +42,9 @@ h1 { font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; letter-spacing: -0.03e
 h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 500; color: var(--text-secondary); margin-bottom: 2rem; }
 p { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 3rem; }
 
-/* --- HERO LAYOUT & BLENDED PHOTO (THE FIX) --- */
+/* =========================================
+   HERO LAYOUT & CLEAN PHOTO (NO BLEND)
+========================================= */
 .hero-layout {
     display: flex;
     align-items: center;
@@ -56,19 +58,23 @@ p { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin-
 
 .hero-photo-container {
     flex-shrink: 0;
-    width: 320px; /* Controls desktop image size */
-    /* This creates the faded edges matching your screenshot */
-    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%);
-    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%);
+    width: 320px; 
+    height: 400px; 
+    margin: 0 auto;
+    border-radius: 24px; /* Gives it clean, modern rounded edges */
+    overflow: hidden; /* Ensures the image doesn't spill out of the rounded corners */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); /* Nice drop shadow for depth */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle border to match glass */
 }
 
 .hero-photo {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* Keeps aspect ratio without stretching */
     display: block;
-    object-fit: cover;
-    border-radius: 20px; /* Slight rounding underneath the fade */
 }
+
+/* ========================================= */
 
 /* Buttons */
 .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -118,7 +124,7 @@ p { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin-
 @media (max-width: 1024px) {
     .glass-panel { padding: 3rem; }
     .glass-card { padding: 2rem; }
-    .hero-photo-container { width: 280px; }
+    .hero-photo-container { width: 280px; height: 350px; }
 }
 
 @media (max-width: 768px) {
@@ -137,7 +143,7 @@ p { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin-
 
     /* MOBILE HERO LAYOUT FIX */
     .hero-layout { 
-        flex-direction: column; /* Stacks text on top of image */
+        flex-direction: column; 
         text-align: center; 
         gap: 2rem;
     }
@@ -148,9 +154,10 @@ p { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin-
         align-items: center;
     }
 
-    /* Shrinks the photo so it doesn't take over the screen */
+    /* STRICTLY Constrain the photo on mobile */
     .hero-photo-container { 
-        width: 250px; 
+        width: 260px; 
+        height: 340px; 
     }
 
     .btn-group { flex-direction: column; width: 100%; }
@@ -168,5 +175,10 @@ p { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin-
     .glass-panel, .glass-card { padding: 1.5rem; }
     .bento-grid { grid-template-columns: 1fr; }
     .glass-nav ul { gap: 0.75rem; }
-    .hero-photo-container { width: 220px; }
+    
+    /* Even smaller strict constraint for very small phones */
+    .hero-photo-container { 
+        width: 220px; 
+        height: 300px; 
+    }
 }
