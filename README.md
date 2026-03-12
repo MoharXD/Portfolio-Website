@@ -6,22 +6,6 @@ This repository contains the source code for my GitHub Pages portfolio website, 
 ### 🌐 Live Website:
 [https://MoharXD.github.io/](https://MoharXD.github.io/)
 
----
-
-## 👨‍💻 About Me
-Hi, I'm **Mohar Gorai**.
-I'm a B.Tech IT student at VIT and a passionate developer interested in:
-
-* Software Development
-* Web Development & UI/UX (Glassmorphism)
-* AI / ML Integration
-* System Architecture & Design
-* Building innovative tech projects
-
-I enjoy creating projects that solve real-world problems and exploring new technologies.
-
----
-
 ## 🛠 Tech Stack
 This portfolio was built entirely from scratch using:
 
