@@ -47,4 +47,8 @@ MoharXD.github.io/
 ├── css/
 │   └── style.css     
 └── js/
+<<<<<<< HEAD
     └── script.js     
+=======
+    └── script.js     
+>>>>>>> 85acd749b6171b09cba34598a3ddd7c3978a44b3
