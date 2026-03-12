@@ -16,7 +16,7 @@ I'm a B.Tech IT student at VIT and a passionate developer interested in:
 * Web Development & UI/UX (Glassmorphism)
 * AI / ML Integration
 * System Architecture & Design
-* Building innovative tech projects (like my Active Acoustic Privacy Shield!)
+* Building innovative tech projects
 
 I enjoy creating projects that solve real-world problems and exploring new technologies.
 
@@ -45,6 +45,6 @@ MoharXD.github.io/
 ├── projects.html     # Featured Works
 ├── contact.html      # Contact Information
 ├── css/
-│   └── style.css     # Main stylesheet (Glassmorphism UI)
+│   └── style.css     
 └── js/
-    └── script.js     # 3D tilt and scroll animations
+    └── script.js     
