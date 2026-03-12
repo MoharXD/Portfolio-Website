@@ -24,11 +24,17 @@ This portfolio was built entirely from scratch using:
 ```text
 MoharXD.github.io/
 │
-├── index.html        # Home Page
-├── about.html        # Background & Skills
-├── projects.html     # Featured Works
-├── contact.html      # Contact Information
+├── index.html          # Home Page (with your clean profile photo)
+├── about.html          # Background, Education & Skills
+├── projects.html       # Featured Works & GitHub Links
+├── contact.html        # Contact Information & Professional Links
+├── README.md           # Professional project documentation
+│
 ├── css/
-│   └── style.css     
-└── js/
-    └── script.js
+│   └── style.css       # Core styling, Glassmorphism, and Mobile Responsiveness
+│
+├── js/
+│   └── script.js       # Interactivity, 3D Tilt (Desktop only), and Scroll Reveals
+│
+└── img/                # Folder for all your image assets
+    └── profile.jpg     # Your profile portrait
