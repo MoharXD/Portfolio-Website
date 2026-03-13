@@ -27,7 +27,7 @@ MoharXD.github.io/
 ├── index.html            # Entry point: Hero section & high-level intro
 ├── about.html            # Education timeline & language proficiencies
 ├── project-work.html     # Bento grid of featured apps & GitHub activity
-├── contact.html          # Professional links, email, & location details
+├── contact.html          # Professional links, email & location
 ├── README.md             # Project overview & tech stack documentation
 │
 ├── css/
@@ -37,7 +37,7 @@ MoharXD.github.io/
 │   └── script.js         # 3D Tilt, typing effects, & glass cursor trail
 │
 ├── img/                  # All visual assets
-│   └── profile.jpg       # Your hero portrait
+│   └── profile.jpg       # Hero portrait
 │
 └── assets/               # External documents
-    └── Mohar_Resume.pdf  # Your downloadable CV
+    └── Mohar_Resume.pdf  # Downloadable CV
