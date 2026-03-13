@@ -64,16 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 3. Dynamic Typing Animation
     // ==========================================
-    /**
-     * FEATURE: Dynamic Text Targeting
-     * Simulates a typewriter effect on the page's main heading.
-     * It reads the `data-text` attribute from the HTML to know what to type,
-     * allowing this single function to work on any page automatically.
-     */
     const typingTextElement = document.querySelector('.typing-text');
 
     if (typingTextElement) {
-        // Fetch the target text from the HTML attribute, fallback to an empty string if missing
         const textToType = typingTextElement.getAttribute('data-text') || "";
         let index = 0;
 
