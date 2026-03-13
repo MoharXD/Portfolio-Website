@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
+    // --- Scroll Reveal Logic ---
     const observerOptions = {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px"
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+    // --- 3D Hover Tilt Effect (Desktop) ---
     const tiltElements = document.querySelectorAll('.tilt-element');
 
     tiltElements.forEach(element => {
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const rect = element.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const xRotation = -((y - rect.height / 2) / rect.height) * 10;
                 const yRotation = ((x - rect.width / 2) / rect.width) * 10;
 
@@ -46,43 +48,58 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // --- Typewriter Effect ---
     const typingTextElement = document.querySelector('.typing-text');
-    
+
     if (typingTextElement) {
         const textToType = "Mohar Gorai";
         let index = 0;
-        
-        function typewriter() {
+
+        const typewriter = () => {
             if (index < textToType.length) {
                 typingTextElement.textContent += textToType.charAt(index);
                 index++;
-                setTimeout(typewriter, 120); 
+                setTimeout(typewriter, 120);
             }
-        }
-        
+        };
+
         setTimeout(typewriter, 800);
     }
 
-    const cursorTrail = document.querySelector('.cursor-trail');
-    
-    if (cursorTrail && window.innerWidth > 768) {
-        let mouseX = 0;
-        let mouseY = 0;
-        let trailX = 0;
-        let trailY = 0;
+    // --- Dynamic Cursor Trail (Desktop) ---
+    if (window.innerWidth > 768) {
+        const createTrailPart = (x, y) => {
+            const part = document.createElement('div');
+            part.className = 'cursor-trail-part';
+            part.style.left = `${x}px`;
+            part.style.top = `${y}px`;
+
+            document.body.appendChild(part);
+
+            // Force reflow for CSS transition
+            void part.offsetWidth;
+            part.classList.add('fade');
+
+            // Garbage collection post-animation
+            setTimeout(() => {
+                part.remove();
+            }, 500);
+        };
+
+        let lastX = 0;
+        let lastY = 0;
+        const minimumDistance = 15;
 
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+            const deltaX = Math.abs(e.clientX - lastX);
+            const deltaY = Math.abs(e.clientY - lastY);
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        function animateCursor() {
-            trailX += (mouseX - trailX) * 0.15;
-            trailY += (mouseY - trailY) * 0.15;
-            cursorTrail.style.transform = `translate(${trailX}px, ${trailY}px) translate(-50%, -50%)`;
-            requestAnimationFrame(animateCursor);
-        }
-        
-        animateCursor();
+            if (distance > minimumDistance) {
+                createTrailPart(e.clientX, e.clientY);
+                lastX = e.clientX;
+                lastY = e.clientY;
+            }
+        });
     }
 });

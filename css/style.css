@@ -1,3 +1,4 @@
+/* --- Variables --- */
 :root {
     --bg-color: #050505;
     --text-primary: #ffffff;
@@ -10,6 +11,7 @@
     --accent-3: #06b6d4;
 }
 
+/* --- Base Styles --- */
 * {
     margin: 0;
     padding: 0;
@@ -25,9 +27,10 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    cursor: default;
+    cursor: crosshair;
 }
 
+/* --- Ambient Background Lights --- */
 .ambient-background {
     position: fixed;
     top: 0;
@@ -83,6 +86,7 @@ body {
     }
 }
 
+/* --- Glassmorphism Utilities --- */
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: blur(24px) saturate(180%);
@@ -95,6 +99,7 @@ body {
     overflow: hidden;
 }
 
+/* --- Navigation --- */
 .glass-nav {
     position: fixed;
     top: 1rem;
@@ -160,6 +165,7 @@ body {
     border-radius: 50%;
 }
 
+/* --- Layout & Typography --- */
 .container {
     max-width: 1100px;
     margin: 150px auto 40px;
@@ -212,6 +218,7 @@ p {
     margin-bottom: 3rem;
 }
 
+/* --- Hero Section --- */
 .hero-layout {
     display: flex;
     align-items: center;
@@ -241,28 +248,7 @@ p {
     display: block;
 }
 
-.cursor {
-    display: inline-block;
-    width: 4px;
-    height: 1em;
-    background-color: var(--text-primary);
-    margin-left: 8px;
-    border-radius: 2px;
-    animation: blink-cursor 0.8s step-end infinite;
-}
-
-@keyframes blink-cursor {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-}
-
+/* --- Buttons --- */
 .btn-group {
     display: flex;
     gap: 1rem;
@@ -330,6 +316,7 @@ p {
     flex-wrap: wrap;
 }
 
+/* --- Bento Grids & Cards --- */
 .page-header {
     margin-bottom: 3rem;
 }
@@ -399,6 +386,7 @@ p {
     display: block;
 }
 
+/* --- GitHub Calendar Integration --- */
 .github-calendar-container {
     width: 100%;
     overflow-x: auto;
@@ -414,6 +402,7 @@ p {
     opacity: 0.9;
 }
 
+/* --- Utilities & Lists --- */
 .contact-wrapper {
     max-width: 650px;
     margin: 0 auto;
@@ -460,6 +449,7 @@ p {
     color: #fff;
 }
 
+/* --- Footer --- */
 .glass-footer {
     text-align: center;
     padding: 2rem 0;
@@ -472,6 +462,7 @@ p {
     width: 100%;
 }
 
+/* --- Animations --- */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -496,27 +487,49 @@ p {
     }
 }
 
-.cursor-trail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 36px;
-    height: 36px;
-    border: 2px solid rgba(6, 182, 212, 0.6);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    will-change: transform;
-    box-shadow: 0 0 15px rgba(6, 182, 212, 0.4), inset 0 0 10px rgba(6, 182, 212, 0.2);
-    display: none;
+.cursor {
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    background-color: var(--text-primary);
+    margin-left: 8px;
+    border-radius: 2px;
+    animation: blink-cursor 0.8s step-end infinite;
 }
 
-@media (min-width: 769px) {
-    .cursor-trail {
-        display: block;
+@keyframes blink-cursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
     }
 }
 
+/* --- Dynamic Cursor Trail Nodes --- */
+.cursor-trail-part {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-3);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 10px var(--accent-3), inset 0 0 5px rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    opacity: 1;
+}
+
+.cursor-trail-part.fade {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+}
+
+/* --- Responsive Media Queries --- */
 @media (max-width: 1024px) {
     .glass-panel {
         padding: 3rem;
@@ -629,6 +642,10 @@ p {
     .orb-3 {
         width: 200px;
         height: 200px;
+    }
+
+    .cursor-trail-part {
+        display: none;
     }
 }
 
