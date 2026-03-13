@@ -50,4 +50,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+    // 3. Typing Animation for Hero Section
+    const typingTextElement = document.querySelector('.typing-text');
+
+    // Only run this if the element exists (prevents errors on other pages)
+    if (typingTextElement) {
+        const textToType = "Mohar Gorai";
+        let index = 0;
+
+        function typewriter() {
+            if (index < textToType.length) {
+                typingTextElement.textContent += textToType.charAt(index);
+                index++;
+                // 120ms delay between each letter typed
+                setTimeout(typewriter, 120);
+            }
+        }
+
+        // Start the typing effect after 800ms (waits for the fade-up animation)
+        setTimeout(typewriter, 800);
+    }
 });

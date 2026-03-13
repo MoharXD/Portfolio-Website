@@ -619,3 +619,27 @@ p {
         height: 300px;
     }
 }
+
+/* --- Typing Animation Cursor --- */
+.cursor {
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    /* Matches the height of the h1 text */
+    background-color: var(--text-primary);
+    margin-left: 8px;
+    border-radius: 2px;
+    animation: blink-cursor 0.8s step-end infinite;
+}
+
+@keyframes blink-cursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
