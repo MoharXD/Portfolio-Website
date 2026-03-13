@@ -297,6 +297,52 @@ body {
     display: block;
 }
 
+/* --- NEW: Live Status Indicators --- */
+/**
+ * Flex layout to neatly align the pulsing dot alongside the text.
+ */
+.live-sync-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/**
+ * The physical pulsing dot.
+ * Uses hardware-accelerated transforms for smooth, 60fps animations.
+ */
+.pulse-dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-3);
+    /* Cyan to match the GitHub graph theme */
+    box-shadow: 0 0 0 rgba(6, 182, 212, 0.7);
+    animation: pulse-ring 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/**
+ * Pulse Animation Keyframes.
+ * Expands a transparent shadow outward while slightly scaling the core dot.
+ */
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
+    }
+
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 6px rgba(6, 182, 212, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+    }
+}
+
 h1 {
     font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 800;
@@ -611,66 +657,27 @@ p {
     }
 }
 
-/* * Premium Glassmorphic Cursor Trail (Smoked Glass Outline) 
- * Scaled down with a dark border for crisp, elegant visibility.
- */
+/* * Premium Glassmorphic Cursor Trail (Smoked Glass Outline) */
 .cursor-trail-part {
     position: fixed;
     width: 20px;
-    /* Scaled back down to a sleek, manageable size */
     height: 20px;
     background: rgba(255, 255, 255, 0.04);
-    /* Subtle frosted fill */
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border: 1px solid rgba(0, 0, 0, 0.8);
-    /* The dark border you suggested for sharp contrast */
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    /* A dark drop shadow to pop against bright orbs, plus a faint white inner rim so it still looks like glass */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
     transform: translate(-50%, -50%) scale(0.6);
     opacity: 1;
-    /* Sped up the transition slightly (0.5s) to match the smaller size */
     transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cursor-trail-part.fade {
     opacity: 0;
     transform: translate(-50%, -50%) scale(1.4);
-    /* Tighter, cleaner expansion */
-}
-
-/* * Premium Glassmorphic Cursor Trail (Smoked Glass Outline) 
- * Scaled down with a dark border for crisp, elegant visibility.
- */
-.cursor-trail-part {
-    position: fixed;
-    width: 20px;
-    /* Scaled back down to a sleek, manageable size */
-    height: 20px;
-    background: rgba(255, 255, 255, 0.04);
-    /* Subtle frosted fill */
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    /* The dark border you suggested for sharp contrast */
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    /* A dark drop shadow to pop against bright orbs, plus a faint white inner rim so it still looks like glass */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%) scale(0.6);
-    opacity: 1;
-    /* Sped up the transition slightly (0.5s) to match the smaller size */
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.cursor-trail-part.fade {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1.4);
-    /* Tighter, cleaner expansion */
 }
 
 /* =========================================
