@@ -1,16 +1,32 @@
+/* ==========================================================================
+   MOHAR GORAI PORTFOLIO - MAIN STYLESHEET
+   Description: Glassmorphic theme with ambient backgrounds and 3D effects.
+   Architecture: 
+   1. Variables | 2. Reset | 3. Backgrounds | 4. Core UI | 5. Navigation
+   6. Typography | 7. Components | 8. Animations | 9. Media Queries
+   ========================================================================== */
+
 /* =========================================
    1. VARIABLES & THEMING
 ========================================= */
 :root {
+    /* Color Palette */
     --bg-color: #050505;
     --text-primary: #ffffff;
     --text-secondary: #a1a1aa;
+
+    /* Glassmorphism Configuration */
     --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-highlight: rgba(255, 255, 255, 0.15);
+
+    /* Brand Accents */
     --accent-1: #4f46e5;
+    /* Indigo */
     --accent-2: #ec4899;
+    /* Pink */
     --accent-3: #06b6d4;
+    /* Cyan */
 }
 
 /* =========================================
@@ -28,6 +44,7 @@ body {
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
+    /* Prevent horizontal scroll from animations */
     line-height: 1.6;
     display: flex;
     flex-direction: column;
@@ -48,6 +65,7 @@ body {
     background: #000;
 }
 
+/* Floating gradient orbs for background depth */
 .orb {
     position: absolute;
     border-radius: 50%;
@@ -95,6 +113,7 @@ body {
 /* =========================================
    4. GLASSMORPHISM CORE
 ========================================= */
+/* Primary large panels (e.g., Hero, Contact) */
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: blur(24px) saturate(180%);
@@ -107,6 +126,7 @@ body {
     overflow: hidden;
 }
 
+/* Smaller content cards (e.g., Projects, Bento Grid) */
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(24px) saturate(180%);
@@ -179,6 +199,7 @@ body {
     color: var(--text-primary);
 }
 
+/* Active navigation indicator dot */
 .glass-nav a.active::after {
     content: '';
     position: absolute;
@@ -266,7 +287,7 @@ p {
 /* =========================================
    7. UI COMPONENTS
 ========================================= */
-/* Hero Section */
+/* --- Hero Section --- */
 .hero-layout {
     display: flex;
     align-items: center;
@@ -296,7 +317,7 @@ p {
     display: block;
 }
 
-/* Buttons */
+/* --- Buttons --- */
 .btn-group {
     display: flex;
     gap: 1rem;
@@ -364,7 +385,7 @@ p {
     flex-wrap: wrap;
 }
 
-/* Grids & Cards */
+/* --- Grids & Layouts --- */
 .page-header {
     margin-bottom: 3rem;
 }
@@ -386,6 +407,7 @@ p {
     margin-bottom: 0;
 }
 
+/* --- GitHub Integration --- */
 .github-card {
     padding: 2.5rem;
 }
@@ -405,7 +427,7 @@ p {
     opacity: 0.9;
 }
 
-/* Timeline & Lists */
+/* --- Timeline & Lists --- */
 .timeline {
     border-left: 2px solid var(--glass-border);
     padding-left: 2rem;
@@ -417,6 +439,7 @@ p {
     margin-bottom: 2.5rem;
 }
 
+/* Timeline node dot */
 .timeline-item::before {
     content: '';
     position: absolute;
@@ -429,6 +452,7 @@ p {
     box-shadow: 0 0 10px var(--accent-1);
 }
 
+/* --- Contact & About Info --- */
 .contact-wrapper {
     max-width: 650px;
     margin: 0 auto;
@@ -474,7 +498,7 @@ p {
     color: #fff;
 }
 
-/* Footer */
+/* --- Footer --- */
 .glass-footer {
     text-align: center;
     padding: 2rem 0;
@@ -490,6 +514,7 @@ p {
 /* =========================================
    8. ANIMATIONS & EFFECTS
 ========================================= */
+/* Intersection Observer classes */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -501,6 +526,7 @@ p {
     transform: translateY(0);
 }
 
+/* Initial page load fade-up */
 .fade-up {
     opacity: 0;
     transform: translateY(40px);
@@ -514,6 +540,7 @@ p {
     }
 }
 
+/* Typing cursor animation */
 .cursor {
     display: inline-block;
     width: 4px;
@@ -535,25 +562,57 @@ p {
         opacity: 0;
     }
 }
-
-/* Liquid Light Cursor Tail */
+/* * Premium Glassmorphic Cursor Trail (Smoked Glass Outline) 
+ * Scaled down with a dark border for crisp, elegant visibility.
+ */
 .cursor-trail-part {
     position: fixed;
-    width: 8px;
-    height: 8px;
-    background-color: var(--accent-3);
+    width: 20px; /* Scaled back down to a sleek, manageable size */
+    height: 20px;
+    background: rgba(255, 255, 255, 0.04); /* Subtle frosted fill */
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px); 
+    border: 1px solid rgba(0, 0, 0, 0.8); /* The dark border you suggested for sharp contrast */
     border-radius: 50%;
-    pointer-events: none;
+    pointer-events: none; 
     z-index: 9999;
-    box-shadow: 0 0 10px rgba(6, 182, 212, 0.8), 0 0 20px rgba(6, 182, 212, 0.4);
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.7;
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    /* A dark drop shadow to pop against bright orbs, plus a faint white inner rim so it still looks like glass */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
+    transform: translate(-50%, -50%) scale(0.6); 
+    opacity: 1;
+    /* Sped up the transition slightly (0.5s) to match the smaller size */
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cursor-trail-part.fade {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
+    transform: translate(-50%, -50%) scale(1.4); /* Tighter, cleaner expansion */
+}
+/* * Premium Glassmorphic Cursor Trail (Smoked Glass Outline) 
+ * Scaled down with a dark border for crisp, elegant visibility.
+ */
+.cursor-trail-part {
+    position: fixed;
+    width: 20px; /* Scaled back down to a sleek, manageable size */
+    height: 20px;
+    background: rgba(255, 255, 255, 0.04); /* Subtle frosted fill */
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px); 
+    border: 1px solid rgba(0, 0, 0, 0.8); /* The dark border you suggested for sharp contrast */
+    border-radius: 50%;
+    pointer-events: none; 
+    z-index: 9999;
+    /* A dark drop shadow to pop against bright orbs, plus a faint white inner rim so it still looks like glass */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
+    transform: translate(-50%, -50%) scale(0.6); 
+    opacity: 1;
+    /* Sped up the transition slightly (0.5s) to match the smaller size */
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor-trail-part.fade {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.4); /* Tighter, cleaner expansion */
 }
 
 /* =========================================
@@ -580,6 +639,7 @@ p {
         padding: 0 1.5rem;
     }
 
+    /* Mobile Navigation */
     .glass-nav {
         width: 95%;
         padding: 0.75rem 1.5rem;
@@ -601,6 +661,7 @@ p {
         font-size: 0.85rem;
     }
 
+    /* Layout adjustments */
     .glass-panel {
         padding: 2rem;
         border-radius: 24px;
@@ -620,6 +681,7 @@ p {
         margin-bottom: 2rem;
     }
 
+    /* Hero layout stacking */
     .hero-layout {
         flex-direction: column;
         text-align: center;
@@ -637,6 +699,7 @@ p {
         height: 340px;
     }
 
+    /* Full-width buttons */
     .btn-group {
         flex-direction: column;
         width: 100%;
@@ -646,6 +709,7 @@ p {
         width: 100%;
     }
 
+    /* Contact list wrapping */
     .contact-list li {
         flex-direction: column;
         align-items: flex-start;
@@ -658,6 +722,7 @@ p {
         width: auto;
     }
 
+    /* Scale down ambient orbs */
     .orb-1 {
         width: 250px;
         height: 250px;
@@ -673,6 +738,7 @@ p {
         height: 200px;
     }
 
+    /* Disable resource-heavy cursor trail on mobile */
     .cursor-trail-part {
         display: none;
     }
