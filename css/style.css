@@ -4,23 +4,21 @@
    Architecture: 
    1. Variables | 2. Reset | 3. Backgrounds | 4. Core UI | 5. Navigation
    6. Typography | 7. Components | 8. Animations | 9. Media Queries
+   10. Scrollbar | 11. Pulse FX | 12. Tech Stack & Layout Hacks
    ========================================================================== */
 
 /* =========================================
    1. VARIABLES & THEMING
 ========================================= */
 :root {
-    /* Color Palette */
     --bg-color: #050505;
     --text-primary: #ffffff;
     --text-secondary: #a1a1aa;
 
-    /* Glassmorphism Configuration */
     --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-highlight: rgba(255, 255, 255, 0.15);
 
-    /* Brand Accents */
     --accent-1: #4f46e5;
     /* Indigo */
     --accent-2: #ec4899;
@@ -168,7 +166,8 @@ body {
     border: 1px solid var(--glass-border);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 var(--glass-highlight), inset 1px 0 0 0 var(--glass-highlight);
     border-radius: 24px;
-    padding: 2.5rem;
+    padding: 1.5rem 2rem;
+    /* SHRUNK to make boxes tighter */
     transition: border-color 0.3s ease;
     height: 100%;
 }
@@ -286,33 +285,6 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.pulse-dot {
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--accent-3);
-    box-shadow: 0 0 0 rgba(6, 182, 212, 0.7);
-    animation: pulse-ring 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes pulse-ring {
-    0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
-    }
-
-    70% {
-        transform: scale(1.1);
-        box-shadow: 0 0 0 6px rgba(6, 182, 212, 0);
-    }
-
-    100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
-    }
 }
 
 h1 {
@@ -497,14 +469,16 @@ p {
 
 .timeline-item {
     position: relative;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.25rem;
+    /* SHRUNK spacing */
 }
 
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -2.45rem;
-    top: 0;
+    left: calc(-1.5rem - 7px);
+    /* Increased from 0.15rem to push the dot down to the true center */
+    top: 0.4rem;
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -512,9 +486,6 @@ p {
     box-shadow: 0 0 10px var(--accent-1);
 }
 
-/* =========================================
-   NEW: TIMELINE LINKS & ACTIVE NODE
-========================================= */
 .timeline-item h4 a {
     color: var(--text-primary);
     text-decoration: none;
@@ -526,7 +497,6 @@ p {
     color: var(--accent-3);
 }
 
-/* Target the blue dot (::before) of the active item */
 .active-timeline-item::before {
     animation: pulse-blue 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -562,7 +532,8 @@ p {
     list-style: none;
     text-align: left;
     display: inline-block;
-    line-height: 2.5;
+    line-height: 2;
+    /* SHRUNK spacing */
     font-size: 1.1rem;
     width: 100%;
 }
@@ -588,7 +559,7 @@ p {
 }
 
 .language-list {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     color: var(--text-secondary);
 }
 
@@ -596,16 +567,29 @@ p {
     color: #fff;
 }
 
+/* CENTERED FOOTER FIX */
 .glass-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 2rem 0;
+    padding: 1.5rem 2rem;
     margin-top: auto;
     border-top: 1px solid var(--glass-border);
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.glass-footer p {
+    max-width: 100%;
+    margin-bottom: 0;
     color: var(--text-secondary);
     font-size: 0.9rem;
-    width: 100%;
+    letter-spacing: 0.05em;
 }
 
 /* =========================================
@@ -680,7 +664,148 @@ p {
 }
 
 /* =========================================
-   10. RESPONSIVE DESIGN
+   10. SMOOTH PAGE TRANSITIONS
+========================================= */
+body {
+    opacity: 0;
+    animation: page-fade-in 0.4s ease-out forwards;
+}
+
+body.fade-out {
+    animation: page-fade-out 0.3s ease-in forwards;
+}
+
+body main {
+    animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes page-fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   11. CUSTOM SCROLLBAR & PULSE
+========================================= */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-3);
+    box-shadow: 0 0 10px var(--accent-3);
+}
+
+.green-dot {
+    background-color: #10b981;
+    box-shadow: 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse-green 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* =========================================
+   12. TECH STACK & LAYOUT HACKS
+========================================= */
+
+/* Dark, Rounded Rectangle Pills */
+.tech-pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+.tech-pill {
+    background: rgba(15, 15, 15, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: default;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tech-pill:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-3);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 10px rgba(6, 182, 212, 0.2);
+}
+
+/* Perfect alignment across Bento Grid columns */
+.tech-stack-wrapper {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+/* Lock specific cards to a 1:1 Square */
+.square-card {
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+}
+
+/* =========================================
+   13. RESPONSIVE DESIGN
 ========================================= */
 @media (max-width: 1024px) {
     .glass-panel {
@@ -799,6 +924,11 @@ p {
     .cursor-trail-part {
         display: none;
     }
+
+    /* Remove square lock on mobile so text doesn't squish */
+    .square-card {
+        aspect-ratio: auto;
+    }
 }
 
 @media (max-width: 480px) {
@@ -823,5 +953,70 @@ p {
 
     .github-card {
         padding: 1.5rem;
+    }
+}
+
+/* =========================================
+   14. FINAL ALIGNMENT & SIZING FIXES
+========================================= */
+/* 1. Force the grid to maintain exactly two identical columns */
+.bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* 2. Remove the forced mathematical square that broke the Education card */
+.square-card {
+    height: 100% !important;
+    aspect-ratio: auto !important;
+}
+
+/* 3. Shrink the Education content so the card becomes shorter naturally */
+.timeline {
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* 3. Restore the Education content to a readable, premium size */
+.timeline {
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.timeline-item {
+    margin-bottom: 1.5rem;
+}
+
+.timeline-item h4 {
+    font-size: 1.1rem;
+    /* Larger, readable headers */
+    margin-bottom: 0.2rem;
+}
+
+.timeline-item p {
+    font-size: 0.95rem;
+    /* Clearer paragraph text */
+    line-height: 1.5;
+}
+
+.timeline-item .date-badge {
+    font-size: 0.85rem;
+    /* Clearer dates */
+    margin-bottom: 0.3rem;
+}
+
+/* 4. Make Languages text large and spread it out to match the Education box height */
+.language-list {
+    font-size: 1.15rem;
+    /* Much larger, crisp text */
+    line-height: 2.4;
+    /* Increased spacing so it fills the box nicely */
+    margin-top: 1.5rem;
+}
+
+/* 5. Stack them nicely on mobile phones */
+@media (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
     }
 }
