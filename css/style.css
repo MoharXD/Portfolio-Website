@@ -167,7 +167,7 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 var(--glass-highlight), inset 1px 0 0 0 var(--glass-highlight);
     border-radius: 24px;
     padding: 1.5rem 2rem;
-    /* SHRUNK to make boxes tighter */
+    /* Tightened boxes */
     transition: border-color 0.3s ease;
     height: 100%;
 }
@@ -285,6 +285,37 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+/* Un-crushable Pulsing Dot Fix */
+.pulse-dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: var(--accent-3);
+    box-shadow: 0 0 0 rgba(6, 182, 212, 0.7);
+    animation: pulse-ring 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
+    }
+
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 6px rgba(6, 182, 212, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+    }
 }
 
 h1 {
@@ -425,10 +456,11 @@ p {
     margin-bottom: 3rem;
 }
 
+/* 2-Column strict matching grid */
 .bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
 }
 
 .glass-card h3 {
@@ -461,23 +493,38 @@ p {
     opacity: 0.9;
 }
 
+/* Readable timeline */
 .timeline {
     border-left: 2px solid var(--glass-border);
-    padding-left: 2rem;
+    padding-left: 1.5rem;
     margin-top: 1.5rem;
 }
 
 .timeline-item {
     position: relative;
-    margin-bottom: 1.25rem;
-    /* SHRUNK spacing */
+    margin-bottom: 1.5rem;
 }
 
+.timeline-item h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.timeline-item p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.timeline-item .date-badge {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+/* Pixel-perfect dot alignment */
 .timeline-item::before {
     content: '';
     position: absolute;
     left: calc(-1.5rem - 7px);
-    /* Increased from 0.15rem to push the dot down to the true center */
     top: 0.4rem;
     width: 12px;
     height: 12px;
@@ -527,13 +574,11 @@ p {
     text-align: center;
 }
 
-.contact-list,
-.language-list {
+.contact-list {
     list-style: none;
     text-align: left;
     display: inline-block;
     line-height: 2;
-    /* SHRUNK spacing */
     font-size: 1.1rem;
     width: 100%;
 }
@@ -558,8 +603,12 @@ p {
     word-break: break-all;
 }
 
+/* Matched language list styling */
 .language-list {
-    margin-top: 1rem;
+    list-style: none;
+    font-size: 1.15rem;
+    line-height: 2.4;
+    margin-top: 1.5rem;
     color: var(--text-secondary);
 }
 
@@ -567,7 +616,7 @@ p {
     color: #fff;
 }
 
-/* CENTERED FOOTER FIX */
+/* Centered Footer */
 .glass-footer {
     display: flex;
     justify-content: center;
@@ -664,9 +713,8 @@ p {
 }
 
 /* =========================================
-   10. FAST PAGE TRANSITIONS (Fix for slow internet)
+   10. FAST PAGE TRANSITIONS
 ========================================= */
-/* Only hide the main content initially, let the background load instantly */
 body main {
     opacity: 0;
     animation: content-slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -685,7 +733,7 @@ body main {
 }
 
 /* =========================================
-   11. CUSTOM SCROLLBAR & PULSE
+   11. CUSTOM GLASS SCROLLBAR
 ========================================= */
 html {
     scrollbar-width: thin;
@@ -711,34 +759,9 @@ html {
     box-shadow: 0 0 10px var(--accent-3);
 }
 
-.green-dot {
-    background-color: #10b981;
-    box-shadow: 0 0 0 rgba(16, 185, 129, 0.7);
-    animation: pulse-green 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes pulse-green {
-    0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-    }
-
-    70% {
-        transform: scale(1.1);
-        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-    }
-
-    100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-    }
-}
-
 /* =========================================
    12. TECH STACK & LAYOUT HACKS
 ========================================= */
-
-/* Dark, Rounded Rectangle Pills */
 .tech-pill-container {
     display: flex;
     flex-wrap: wrap;
@@ -767,16 +790,16 @@ html {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 10px rgba(6, 182, 212, 0.2);
 }
 
-/* Perfect alignment across Bento Grid columns */
+/* Alignment wrapper for Bento Grid */
 .tech-stack-wrapper {
     grid-column: 1 / -1;
     width: 100%;
 }
 
-/* Lock specific cards to a 1:1 Square */
+/* Restores natural grid behavior instead of forced math */
 .square-card {
-    height: auto !important;
-    aspect-ratio: 1 / 1;
+    height: 100% !important;
+    aspect-ratio: auto !important;
 }
 
 /* =========================================
@@ -900,9 +923,9 @@ html {
         display: none;
     }
 
-    /* Remove square lock on mobile so text doesn't squish */
-    .square-card {
-        aspect-ratio: auto;
+    /* Stack grid nicely on mobile */
+    .bento-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -911,10 +934,6 @@ html {
     .glass-panel,
     .glass-card {
         padding: 1.5rem;
-    }
-
-    .bento-grid {
-        grid-template-columns: 1fr;
     }
 
     .glass-nav ul {
@@ -928,70 +947,5 @@ html {
 
     .github-card {
         padding: 1.5rem;
-    }
-}
-
-/* =========================================
-   14. FINAL ALIGNMENT & SIZING FIXES
-========================================= */
-/* 1. Force the grid to maintain exactly two identical columns */
-.bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-}
-
-/* 2. Remove the forced mathematical square that broke the Education card */
-.square-card {
-    height: 100% !important;
-    aspect-ratio: auto !important;
-}
-
-/* 3. Shrink the Education content so the card becomes shorter naturally */
-.timeline {
-    padding-left: 1.5rem;
-    margin-top: 1rem;
-}
-
-/* 3. Restore the Education content to a readable, premium size */
-.timeline {
-    padding-left: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.timeline-item {
-    margin-bottom: 1.5rem;
-}
-
-.timeline-item h4 {
-    font-size: 1.1rem;
-    /* Larger, readable headers */
-    margin-bottom: 0.2rem;
-}
-
-.timeline-item p {
-    font-size: 0.95rem;
-    /* Clearer paragraph text */
-    line-height: 1.5;
-}
-
-.timeline-item .date-badge {
-    font-size: 0.85rem;
-    /* Clearer dates */
-    margin-bottom: 0.3rem;
-}
-
-/* 4. Make Languages text large and spread it out to match the Education box height */
-.language-list {
-    font-size: 1.15rem;
-    /* Much larger, crisp text */
-    line-height: 2.4;
-    /* Increased spacing so it fills the box nicely */
-    margin-top: 1.5rem;
-}
-
-/* 5. Stack them nicely on mobile phones */
-@media (max-width: 768px) {
-    .bento-grid {
-        grid-template-columns: 1fr;
     }
 }
