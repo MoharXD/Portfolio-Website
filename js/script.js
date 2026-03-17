@@ -2,7 +2,7 @@
  * @fileoverview Main Portfolio Interactions Script
  * @author Mohar Gorai
  * @description Handles Scroll Reveals, 3D Hardware Accelerated Hover Effects, 
- * Typing Animations, Custom Cursor Trails, and Smooth Page Transitions.
+ * Typing Animations, and the Custom Glassmorphic Cursor Trail.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -122,34 +122,4 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
-    // ==========================================
-    // 5. App-like Smooth Page Transitions
-    // ==========================================
-    document.querySelectorAll('a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetUrl = this.getAttribute('href');
-
-            // Checks if it is an internal page and not supposed to open in a new tab
-            if (targetUrl && targetUrl.endsWith('.html') && this.getAttribute('target') !== '_blank') {
-                e.preventDefault();
-
-                // Triggers the CSS fade-out animation
-                document.body.classList.add('fade-out');
-
-                // Waits 300ms for animation to finish before navigating
-                setTimeout(() => {
-                    window.location.href = targetUrl;
-                }, 300);
-            }
-        });
-    });
-
-    // BFCache Fix: Prevents the browser's back button from loading a transparent page
-    window.addEventListener('pageshow', (event) => {
-        if (event.persisted) {
-            document.body.classList.remove('fade-out');
-            document.body.style.opacity = "1";
-        }
-    });
 });
