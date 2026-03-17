@@ -1,14 +1,14 @@
-/* ==========================================================================
-   MOHAR GORAI PORTFOLIO - MAIN STYLESHEET
-   Description: Glassmorphic theme with ambient backgrounds and 3D effects.
-   Architecture: 
-   1. Variables | 2. Reset | 3. Backgrounds | 4. Core UI | 5. Navigation
-   6. Typography | 7. Components | 8. Animations | 9. Media Queries
-   10. Scrollbar | 11. Pulse FX | 12. Tech Stack & Layout Hacks
-   ========================================================================== */
+/**
+ * ==========================================================================
+ * MOHAR GORAI PORTFOLIO - MAIN STYLESHEET
+ * * Description: 
+ * A modern, responsive portfolio theme utilizing Glassmorphism design 
+ * principles, ambient animated backgrounds, and hardware-accelerated 3D effects.
+ * ========================================================================== 
+ */
 
 /* =========================================
-   1. VARIABLES & THEMING
+   1. CSS VARIABLES (DESIGN TOKENS)
 ========================================= */
 :root {
     --bg-color: #050505;
@@ -152,7 +152,9 @@ body {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 var(--glass-highlight), inset 1px 0 0 0 var(--glass-highlight);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 0 var(--glass-highlight),
+        inset 1px 0 0 0 var(--glass-highlight);
     border-radius: 32px;
     padding: 4rem;
     position: relative;
@@ -164,10 +166,11 @@ body {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 var(--glass-highlight), inset 1px 0 0 0 var(--glass-highlight);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 0 var(--glass-highlight),
+        inset 1px 0 0 0 var(--glass-highlight);
     border-radius: 24px;
     padding: 1.5rem 2rem;
-    /* Tightened boxes */
     transition: border-color 0.3s ease;
     height: 100%;
 }
@@ -202,14 +205,12 @@ body {
     align-items: center;
 }
 
+/* FIXED LOGO: Removed metallic gradient, set to clean solid white */
 .logo {
     font-weight: 800;
     font-size: 1.2rem;
     letter-spacing: -0.05em;
-    background: linear-gradient(to right, #fff, #a1a1aa);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-primary);
 }
 
 .glass-nav ul {
@@ -245,7 +246,7 @@ body {
 }
 
 /* =========================================
-   6. TYPOGRAPHY & LAYOUT
+   6. TYPOGRAPHY & LAYOUT SYSTEMS
 ========================================= */
 .container {
     max-width: 1100px;
@@ -287,7 +288,6 @@ body {
     gap: 0.5rem;
 }
 
-/* Un-crushable Pulsing Dot Fix */
 .pulse-dot {
     display: block;
     width: 8px;
@@ -354,7 +354,7 @@ p {
 }
 
 /* =========================================
-   7. UI COMPONENTS
+   7. UI COMPONENTS & BUTTON ANIMATIONS
 ========================================= */
 .hero-layout {
     display: flex;
@@ -396,7 +396,7 @@ p {
     border-radius: 100px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -421,7 +421,9 @@ p {
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn-small {
@@ -430,7 +432,7 @@ p {
     border-radius: 100px;
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-primary);
     border: 1px solid var(--glass-border);
@@ -456,7 +458,6 @@ p {
     margin-bottom: 3rem;
 }
 
-/* 2-Column strict matching grid */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -493,7 +494,7 @@ p {
     opacity: 0.9;
 }
 
-/* Readable timeline */
+/* Vertical Timeline System */
 .timeline {
     border-left: 2px solid var(--glass-border);
     padding-left: 1.5rem;
@@ -520,7 +521,6 @@ p {
     margin-bottom: 0.3rem;
 }
 
-/* Pixel-perfect dot alignment */
 .timeline-item::before {
     content: '';
     position: absolute;
@@ -603,7 +603,6 @@ p {
     word-break: break-all;
 }
 
-/* Matched language list styling */
 .language-list {
     list-style: none;
     font-size: 1.15rem;
@@ -616,7 +615,6 @@ p {
     color: #fff;
 }
 
-/* Centered Footer */
 .glass-footer {
     display: flex;
     justify-content: center;
@@ -733,7 +731,7 @@ body main {
 }
 
 /* =========================================
-   11. CUSTOM GLASS SCROLLBAR
+   11. CUSTOM WEBKIT SCROLLBAR
 ========================================= */
 html {
     scrollbar-width: thin;
@@ -790,20 +788,18 @@ html {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 10px rgba(6, 182, 212, 0.2);
 }
 
-/* Alignment wrapper for Bento Grid */
 .tech-stack-wrapper {
     grid-column: 1 / -1;
     width: 100%;
 }
 
-/* Restores natural grid behavior instead of forced math */
 .square-card {
     height: 100% !important;
     aspect-ratio: auto !important;
 }
 
 /* =========================================
-   13. RESPONSIVE DESIGN
+   13. RESPONSIVE MEDIA QUERIES
 ========================================= */
 @media (max-width: 1024px) {
     .glass-panel {
@@ -919,11 +915,11 @@ html {
         height: 200px;
     }
 
+    /* Hides custom cursor on mobile to prevent touch-drag lag */
     .cursor-trail-part {
         display: none;
     }
 
-    /* Stack grid nicely on mobile */
     .bento-grid {
         grid-template-columns: 1fr;
     }

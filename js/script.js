@@ -1,14 +1,15 @@
 /**
- * @fileoverview Main Portfolio Interactions Script
- * @author Mohar Gorai
- * @description Handles Scroll Reveals, 3D Hardware Accelerated Hover Effects, 
- * Typing Animations, and the Custom Glassmorphic Cursor Trail.
+ * ==========================================================================
+ * MOHAR GORAI PORTFOLIO - MAIN JAVASCRIPT
+ * Description: Handles UI interactions, scroll reveal animations, 
+ * 3D tilt effects, typing animations, and the custom cursor trail.
+ * ==========================================================================
  */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
-    // 1. Scroll Reveal Intersection Observer
+    // 1. SCROLL REVEAL (INTERSECTION OBSERVER)
     // ==========================================
     const observerOptions = {
         threshold: 0.1,
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 2. 3D Tilt Effect (Hardware Accelerated)
+    // 2. 3D TILT EFFECT (HARDWARE ACCELERATED)
     // ==========================================
     const tiltElements = document.querySelectorAll('.tilt-element');
 
@@ -62,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 3. Dynamic Typing Animation
+    // 3. DYNAMIC TYPING ANIMATION
     // ==========================================
     const typingTextElement = document.querySelector('.typing-text');
 
@@ -78,13 +79,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        // Delay initialization to sync with the CSS fade-up animation timing
         setTimeout(typewriter, 800);
     }
 
 
     // ==========================================
-    // 4. Glassmorphic Cursor Trail Animation
+    // 4. GLASSMORPHIC CURSOR TRAIL ANIMATION
     // ==========================================
     if (window.innerWidth > 768) {
         let lastX = 0;
