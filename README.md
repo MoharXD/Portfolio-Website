@@ -1,6 +1,6 @@
 # 🚀 Developer Portfolio
 
-> A modern, highly optimized developer portfolio built with vanilla web technologies, featuring a liquid-glass aesthetic, ambient 3D animations, and a strict focus on web performance and accessibility.
+> A modern, highly optimized developer portfolio built with vanilla web technologies, featuring a glass aesthetic, ambient 3D animations, and a strict focus on web performance and accessibility.
 
 🌐 **[View Live Website](https://moharxd.github.io/Portfolio-Website/)**
 
