@@ -14,8 +14,8 @@ export const projects: Project[] = [
     cat: "Hackathon Project (SAH)",
     title: "AI Resume Scoring",
     description: "An automated resume evaluation tool developed during the SAH hackathon to parse, score, and rank candidate profiles based on given criteria.",
-    link: "https://github.com/mohargorai/SAH_hackathon_ResumeScoring",
-    liveLink: "https://queryengine.vercel.app/",
+    link: "https://github.com/mohargorai/SAH-Hackathon-ResumeScoring",
+    liveLink: "",
   },
   {
     num: "03",
@@ -24,5 +24,13 @@ export const projects: Project[] = [
     description: "A comprehensive full-stack web application designed for seamless booking, secure transactions, and efficient ticket management.",
     link: "https://github.com/mohargorai/ticketing-system---project",
     liveLink: "https://ticketing-system-project.onrender.com/",
+  },
+  {
+    num: "04",
+    cat: "Full-Stack",
+    title: "Query Engine",
+    description: "A lightning-fast, full-stack SQL query engine featuring approximate processing. Built with Rust, React, and MongoDB.",
+    link: "https://github.com/Devkanti/Query_Engine",
+    liveLink: "https://queryengine.vercel.app/",
   }
 ];
