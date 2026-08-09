@@ -27,9 +27,9 @@ export const projects: Project[] = [
   },
   {
     num: "04",
-    cat: "Full-Stack",
+    cat: "Hackathon Project (GDG WT'26)",
     title: "Query Engine",
-    description: "A lightning-fast, full-stack SQL query engine featuring approximate processing. Built with Rust, React, and MongoDB.",
+    description: "A cloud-native analytics platform featuring a dual-mode SQL engine, secure role-based dashboards, and real-time query sampling. Built with React, Rust, and MongoDB.",
     link: "https://github.com/Devkanti/Query_Engine",
     liveLink: "https://queryengine.vercel.app/",
   }
