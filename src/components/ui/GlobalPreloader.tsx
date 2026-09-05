@@ -4,6 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 export const GlobalPreloader = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [time, setTime] = useState(() => new Date());
+
+  useEffect(() => {
+    if (!isLoading) return;
+    const interval = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, [isLoading]);
 
   useEffect(() => {
     if (isLoading) {
@@ -161,7 +168,7 @@ export const GlobalPreloader = () => {
                 </div>
                 
                 <span className="text-[#D7E2EA] font-light tracking-widest text-[10px] md:text-xs font-mono mr-4">
-                  {new Date().toLocaleTimeString('en-US', { hour12: false })}
+                  {time.toLocaleTimeString('en-US', { hour12: false })}
                 </span>
                 <span className="text-[#D7E2EA] font-light tracking-widest text-[10px] md:text-xs w-8 text-right font-mono">
                   {Math.round(progress)}%
