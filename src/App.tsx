@@ -1,11 +1,12 @@
 import React from 'react';
 import { HeroSection, AboutSection, ServicesSection, ProjectsSection, CertificatesSection, ContactSection } from './components/sections';
-import { CustomCursor, TargetCursor, GlobalPreloader, BackToTopButton, FadeIn } from './components/ui';
+import { CustomCursor, TargetCursor, GlobalPreloader, BackToTopButton, FadeIn, EdgeBlur } from './components/ui';
 import { FloatingNavbar } from './components/layout';
 
 function App() {
   return (
     <main className="w-full bg-[#0C0C0C] font-sans overflow-x-clip text-[#D7E2EA]">
+      <EdgeBlur position="top" height={60} />
       <GlobalPreloader />
       <CustomCursor />
       <TargetCursor 

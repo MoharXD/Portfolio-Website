@@ -85,7 +85,7 @@ export const Antigravity: React.FC<AntigravityProps> = ({
       };
     });
 
-    let startTime = Date.now();
+    const startTime = Date.now();
 
     const render = () => {
       const now = Date.now();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FadeIn, TypingHeading, SquishBounce, BorderGlow, FlickeringGridQR, Dock } from '../ui';
+import { FadeIn, TypingHeading, SquishBounce, BorderGlow, FlickeringGridQR, Dock, AIOrbFace } from '../ui';
 
 export const ContactSection = () => {
   const [status, setStatus] = useState<"IDLE" | "SUBMITTING" | "SUCCESS" | "ERROR">("IDLE");
@@ -126,6 +126,14 @@ export const ContactSection = () => {
               >
                 <div className="flex flex-col w-full h-full p-6 sm:p-10 relative">
                   <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-[#D7E2EA]/5 rounded-full blur-3xl z-0 pointer-events-none group-focus-within:bg-[#D7E2EA]/10 transition-colors duration-700"></div>
+                  {/* AI Assistant - Outside blurred container to stay sharp */}
+                  <div className="absolute top-6 right-6 sm:top-8 sm:right-10 z-30 pointer-events-none">
+                    <AIOrbFace 
+                      size={64} 
+                      state={status === "IDLE" ? "idle" : status === "SUBMITTING" ? "thinking" : status === "SUCCESS" ? "done" : "error"} 
+                      colors={{ body: "#D7E2EA", bodyEdge: "#0C0C0C", feature: "#0C0C0C" }} 
+                    />
+                  </div>
                   
                   {/* Form Container - ALWAYS rendered to maintain height */}
                   <motion.div 
@@ -137,7 +145,7 @@ export const ContactSection = () => {
                     transition={{ duration: 0.4 }}
                     className={`flex flex-col gap-6 w-full h-full relative z-10 ${status === "SUCCESS" ? "pointer-events-none select-none" : ""}`}
                   >
-                    <h3 className="text-[#D7E2EA] font-black text-3xl sm:text-4xl lg:text-5xl uppercase tracking-widest relative z-10 mb-4">Send a Message</h3>
+                    <h3 className="text-[#D7E2EA] font-black text-3xl sm:text-4xl lg:text-5xl uppercase tracking-widest relative z-10 mb-4 pr-16">Send a Message</h3>
                     
                     <div className="relative z-10">
                       <label className="text-[#D7E2EA]/50 uppercase tracking-widest text-xs font-bold mb-3 block">Your Name</label>

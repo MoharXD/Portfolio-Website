@@ -22,9 +22,38 @@ export const GlobalPreloader = () => {
   }, [isLoading]);
 
   useEffect(() => {
-    let isFullyLoaded = document.readyState === 'complete';
-    const handleLoad = () => { isFullyLoaded = true; };
-    window.addEventListener('load', handleLoad);
+    let isFullyLoaded = false;
+    let images: HTMLImageElement[] = [];
+    let loadedCount = 0;
+
+    const checkFullyLoaded = () => {
+      if (loadedCount >= images.length) {
+        isFullyLoaded = true;
+      }
+    };
+
+    const handleImageLoad = () => {
+      loadedCount++;
+      checkFullyLoaded();
+    };
+
+    // Delay slightly to let React mount all images into the DOM
+    const initTrackingTimer = setTimeout(() => {
+      images = Array.from(document.images);
+      if (images.length === 0) {
+        isFullyLoaded = true;
+      } else {
+        images.forEach((img) => {
+          if (img.complete) {
+            loadedCount++;
+          } else {
+            img.addEventListener('load', handleImageLoad);
+            img.addEventListener('error', handleImageLoad); // count errors so it doesn't hang
+          }
+        });
+        checkFullyLoaded();
+      }
+    }, 100);
 
     let currentProgress = 0;
     const duration = 2000; // 2 seconds minimum loading time
@@ -56,7 +85,6 @@ export const GlobalPreloader = () => {
           clearInterval(timer);
           setTimeout(finishLoading, 400);
         } else {
-          // Never visually show 100 until fully loaded and ready to close
           setProgress(Math.min(currentProgress, 99.9));
         }
       }, interval);
@@ -64,17 +92,20 @@ export const GlobalPreloader = () => {
 
     const initTimer = setTimeout(runSimulatedLoader, 50);
 
-    // Fallback: If some third-party script hangs window.onload, force finish after 10 seconds
     const fallbackTimer = setTimeout(() => {
       isFullyLoaded = true;
     }, 10000);
 
     return () => {
-      window.removeEventListener('load', handleLoad);
       document.body.style.overflow = '';
       clearInterval(timer);
       clearTimeout(initTimer);
       clearTimeout(fallbackTimer);
+      clearTimeout(initTrackingTimer);
+      images.forEach((img) => {
+        img.removeEventListener('load', handleImageLoad);
+        img.removeEventListener('error', handleImageLoad);
+      });
     };
   }, []);
 
@@ -129,6 +160,9 @@ export const GlobalPreloader = () => {
                   </span>
                 </div>
                 
+                <span className="text-[#D7E2EA] font-light tracking-widest text-[10px] md:text-xs font-mono mr-4">
+                  {new Date().toLocaleTimeString('en-US', { hour12: false })}
+                </span>
                 <span className="text-[#D7E2EA] font-light tracking-widest text-[10px] md:text-xs w-8 text-right font-mono">
                   {Math.round(progress)}%
                 </span>
